@@ -4,13 +4,17 @@ import matplotlib.pyplot as plt
 from datetime import date
 import yfinance as yf
 from matplotlib.pyplot import figure
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
 import statistics
 
 class DataTicker:
 
-    def __init__(self, ticker):
-        asset = yf.Ticker(ticker)
-        data = asset.history(period="max")
+    def __init__(self, ticker, period):
+        self.asset = yf.Ticker(ticker)
+        asset = self.asset
+        self.data = self.asset.history(period=period)
+        data = self.data
         data['H_L'] = (
             abs(data['High'] - data['Low'])
         )
@@ -37,3 +41,13 @@ class DataTicker:
 
         self.diffInLowAvg = round(np.nanmean(data['difInLow']), 4)
         self.diffInLowMedian = round(statistics.median(data['difInLow']), 4)
+        self.industry = asset.info['sector']
+
+    def plotG(self):
+        fig = Figure()
+        axis = fig.add_subplot(1, 1, 1)
+        xs = self.data['Date']
+        ys = self.data['H_L']
+        axis.plot(xs, ys)
+        return fig
+

@@ -1,0 +1,86 @@
+<html>
+<head>
+    <title>Stock Data by Kiril</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<h1 style="text-align: center; margin-bottom:5%">Stock Data Statistics by Kiril Spiridonov</h1>
+<div style="max-width: 500px; margin:auto" class="d-flex align-content-start flex-wrap">
+    <form method="post" id="get-data" name="getDataForm" action="get-data">
+        <div class="mb-3">
+            <label for="ticker" class="form-label">Ticker</label>
+            <input type="text" name="ticker" class="form-control" id="ticker" aria-describedby="ticker">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Indicator</th>
+        <th scope="col">Value</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Avg. Vol.</td>
+        <td>{{volumAvg}}</td>
+      </tr>
+      <tr>
+        <td>Median Vol.</td>
+        <td>{{volumMean}}</td>
+        
+      </tr>
+      <tr>
+        <td>High-Low Mean</td>
+        <td>{{HighLowMean}}</td>
+      </tr>
+      <tr>
+        <td>High-Low Median</td>
+        <td>{{HighLowMedian}}</td>
+      </tr>
+      <tr>
+        <td>Open-Close Mean</td>
+        <td>{{OpenCloseMean}}</td>
+      </tr>
+      <tr>
+        <td>Open-Close Median</td>
+        <td>{{OpenCloseMedian}}</td>
+      </tr>
+      <tr>
+        <td>Average difference in Highs</td>
+        <td>{{diffInHighAvg}}</td>
+      </tr>
+      <tr>
+        <td>Median difference in Highs</td>
+        <td>{{diffInHighMedian}}</td>
+      </tr>
+      <tr>
+        <td>Average difference in Lows</td>
+        <td>{{diffInLowAvg}}</td>
+      </tr>
+      <tr>
+        <td>Median difference in Lows</td>
+        <td>{{diffInLowMedian}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

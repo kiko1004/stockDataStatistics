@@ -101,10 +101,26 @@
             <td>Median difference in Lows</td>
             <td>{{diffInLowMedian}}</td>
         </tr>
+        <tr>
+            <td>Bear Bars</td>
+            <td>{{Bear}}; {{BearPercent}}%</td>
+        </tr>
+        <tr>
+            <td>Bull Bars</td>
+            <td>{{Bull}}; {{BullPercent}}%</td>
+        </tr>
+        <tr>
+            <td>Higher Open</td>
+            <td>{{OpenedHigher}}; {{OHpercent}}%</td>
+        </tr>
+        <tr>
+            <td>Lower Open</td>
+            <td>{{OpenedLower}}; {{OLpercent}}%</td>
+        </tr>
         </tbody>
     </table>
     
-    <img src='data:image/png;base64,{{data}}'/>
+    <img style="width:100%" src='data:image/png;base64,{{data}}'/>
 </div>
 </body>
 </html>

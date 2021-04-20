@@ -27,6 +27,19 @@ class DataTicker:
         data['difInLow'] = (
             abs(data['Low'] - data['Low'].shift(1))
         )
+        conditions = [
+            (data['Open'] >= data['Close']),
+            (data['Open'] < data['Close']),
+        ]
+        values = ['Bear', 'Bull']
+        data['Bar'] = np.select(conditions, values)
+        conditions = [
+            (data['Open'] >= data['Close'].shift(1)),
+            (data['Open'] < data['Close'].shift(1)),
+        ]
+        values = ['OpenedHigher', 'OpenedLower']
+        data['OpenedGap'] = np.select(conditions, values)
+
         self.volumAvg = round(statistics.mean(data['Volume']), 2)
         self.volumMean = round(statistics.median(data['Volume']), 2)
 
@@ -42,6 +55,23 @@ class DataTicker:
         self.diffInLowAvg = round(np.nanmean(data['difInLow']), 4)
         self.diffInLowMedian = round(statistics.median(data['difInLow']), 4)
         self.industry = asset.info['sector']
+        Bear = data['Bar'].value_counts()['Bear']
+        Bull = data['Bar'].value_counts()['Bull']
+        BearPercent = round(Bear / (Bull + Bear) * 100, 3)
+        BullPercent = round(Bull / (Bull + Bear) * 100, 3)
+        OpenedHigher = data['OpenedGap'].value_counts()['OpenedHigher']
+        OpenedLower = data['OpenedGap'].value_counts()['OpenedLower']
+        OHpercent = round(OpenedHigher * 100 / (OpenedHigher + OpenedLower), 3)
+        OLpercent = round(OpenedLower * 100 / (OpenedHigher + OpenedLower), 3)
+        self.Bear = Bear
+        self.Bull = Bull
+        self.BullPercent = BullPercent
+        self.BearPercent = BearPercent
+        self.OpenedHigher = OpenedHigher
+        self.OpenedLower = OpenedLower
+        self.OHpercent = OHpercent
+        self.OLpercent = OLpercent
+
 
     def plotG(self):
         fig = Figure()

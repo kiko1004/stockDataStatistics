@@ -63,6 +63,13 @@ class DataTicker:
         OpenedLower = data['OpenedGap'].value_counts()['OpenedLower']
         OHpercent = round(OpenedHigher * 100 / (OpenedHigher + OpenedLower), 3)
         OLpercent = round(OpenedLower * 100 / (OpenedHigher + OpenedLower), 3)
+        data['DiffinOpen'] = (
+            abs(data['Close'].shift(1) - data['Open'])
+        )
+        DiffinOpenAvg = round(np.nanmean(data['DiffinOpen']), 4)
+        DiffinOpenMedian = round(statistics.median(data['DiffinOpen']), 4)
+        self.DiffinOpenAvg = DiffinOpenAvg
+        self.DiffinOpenMedian = DiffinOpenMedian
         self.Bear = Bear
         self.Bull = Bull
         self.BullPercent = BullPercent

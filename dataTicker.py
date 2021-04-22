@@ -78,6 +78,14 @@ class DataTicker:
         self.OpenedLower = OpenedLower
         self.OHpercent = OHpercent
         self.OLpercent = OLpercent
+        Last_Low = data['Low'].iloc[-1]
+        Bid = round((Last_Low - ((self.diffInLowAvg + self.diffInLowMedian) / 2)), 2)
+        self.Bid = Bid
+        Last_High = data['High'].iloc[-1]
+        Ask = round((Last_High + ((self.diffInHighAvg + self.diffInHighMedian) / 2)), 2)
+        self.Ask = Ask
+        self.Last_Low = Last_Low
+        self.Last_High = Last_High
 
 
     def plotG(self):

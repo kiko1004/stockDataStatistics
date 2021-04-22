@@ -52,7 +52,9 @@ def get_data():
                                                Bull=dTicker.Bull, BullPercent=dTicker.BullPercent,
                                                OpenedHigher=dTicker.OpenedHigher, OpenedLower=dTicker.OpenedLower,
                                                OHpercent=dTicker.OHpercent, OLpercent=dTicker.OLpercent,
-                                               DiffinOpenAvg = dTicker.DiffinOpenAvg, DiffinOpenMedian=dTicker.DiffinOpenMedian)
+                                               DiffinOpenAvg = dTicker.DiffinOpenAvg, DiffinOpenMedian=dTicker.DiffinOpenMedian,
+                                               Last_Low = dTicker.Last_Low, Last_High = dTicker.Last_High,
+                                               Bid = dTicker.Bid, Ask = dTicker.Ask)
                     except:
                         ticker = "N/A"
                         return render_template("index.html", ticker=ticker)

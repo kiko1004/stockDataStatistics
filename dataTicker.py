@@ -86,6 +86,18 @@ class DataTicker:
         self.Ask = Ask
         self.Last_Low = Last_Low
         self.Last_High = Last_High
+        conditions = [
+            ((data['Open'] > data['Close'].shift(1)) & (data['Open'] > data['Close'])),
+            ((data['Open'] < data['Close'].shift(1)) & (data['Open'] < data['Close'])),
+            ((data['Open'] < data['Close'].shift(1)) & (data['Open'] > data['Close'])),
+            ((data['Open'] > data['Close'].shift(1)) & (data['Open'] < data['Close'])),
+
+        ]
+        values = [True, True, False, False]
+        data['ImbalanceCounter'] = np.select(conditions, values)
+        x = (data['ImbalanceCounter'].sum() / data['ImbalanceCounter'].count()) * 100
+        percent = str(round(x, 2)) + '%'
+        self.ImbalanceCounter = percent
 
 
     def plotG(self):
